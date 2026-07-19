@@ -39,8 +39,8 @@ app.use(helmet({
 
 const corsOptions = {
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl) or any localhost port
-    if (!origin || /^http:\/\/localhost:\d+$/.test(origin) || origin === process.env.FRONTEND_URL) {
+    // Allow requests with no origin (like mobile apps or curl) or any localhost port / netlify subdomains
+    if (!origin || /^https?:\/\/(?:localhost|.*\.netlify\.app)(?::\d+)?$/.test(origin) || origin === process.env.FRONTEND_URL) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
