@@ -17,12 +17,11 @@ export const registerUser = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Username or email already exists' });
     }
 
-    const otp = generateOTP();
     const user = await User.create({
       username,
       email,
       password,
-      verificationToken: otp,
+      isVerified: true,
     });
 
     // Create default progress tracking document
@@ -37,16 +36,21 @@ export const registerUser = async (req, res) => {
       }],
     });
 
-    // Development note: Output the OTP to console so the user can copy/paste it without email setup.
-    console.log(`\n=== DEVELOPMENT VERIFICATION OTP FOR USER ${username} ===`);
-    console.log(`Email: ${email}`);
-    console.log(`OTP Code: ${otp}`);
-    console.log(`=========================================================\n`);
+    const accessToken = generateToken(user._id);
+    const refreshToken = generateRefreshToken(user._id);
 
     res.status(201).json({
       success: true,
-      message: 'Registration successful. Check console log for verification OTP code.',
-      email: user.email,
+      message: 'Registration successful',
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        profilePicture: user.profilePicture,
+        isVerified: user.isVerified,
+      },
+      accessToken,
+      refreshToken,
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

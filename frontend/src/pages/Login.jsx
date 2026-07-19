@@ -64,9 +64,8 @@ const Login = () => {
     clearMessages();
     setLoading(true);
     try {
-      const data = await register(username, email, password);
-      setSuccessMsg(data.message);
-      setMode('verify');
+      await register(username, email, password);
+      navigate('/dashboard');
     } catch (err) {
       setErrorMsg(err);
     } finally {

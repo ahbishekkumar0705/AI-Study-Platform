@@ -22,6 +22,13 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await api.post('/auth/register', { username, email, password });
+      const { user, accessToken, refreshToken } = response.data;
+      
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      localStorage.setItem('user', JSON.stringify(user));
+      
+      setUser(user);
       setLoading(false);
       return response.data;
     } catch (error) {
