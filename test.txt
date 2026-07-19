@@ -1,0 +1,4 @@
+This is a sample test study material about Artificial Intelligence.
+Artificial Intelligence (AI) is the intelligence of machines or software, as opposed to the intelligence of human beings.
+AI applications include advanced web search engines, recommendation systems, understanding human speech, self-driving cars, and generative AI.
+Machine Learning (ML) is a field of study in artificial intelligence concerned with the development and study of statistical algorithms that can learn from data and generalize to unseen data.

@@ -1,0 +1,18 @@
+# Dependency directories
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Env files
+.env
+.env.*
+
+# Uploads
+backend/uploads/
+uploads/
+
+# OS
+.DS_Store
+Thumbs.db
