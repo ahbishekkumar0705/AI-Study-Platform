@@ -63,6 +63,11 @@ const Login = () => {
     e.preventDefault();
     clearMessages();
     setLoading(true);
+    if (!email || !email.endsWith('@university.edu')) {
+      setErrorMsg('Only university email addresses (@university.edu) are allowed');
+      setLoading(false);
+      return;
+    }
     try {
       await register(username, email, password);
       navigate('/dashboard');
@@ -198,7 +203,7 @@ const Login = () => {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="example@gmail.com"
+                        placeholder="you@university.edu"
                         className="w-full pl-10 pr-4 py-3 bg-slate-100/55 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/25 transition-all"
                       />
                     </div>
@@ -297,7 +302,7 @@ const Login = () => {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="example@gmail.com"
+                        placeholder="you@university.edu"
                         className="w-full pl-10 pr-4 py-3 bg-slate-100/55 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/25 transition-all"
                       />
                     </div>
@@ -421,7 +426,7 @@ const Login = () => {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="example@gmail.com"
+                        placeholder="you@university.edu"
                         className="w-full pl-10 pr-4 py-3 bg-slate-100/55 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/25 transition-all"
                       />
                     </div>

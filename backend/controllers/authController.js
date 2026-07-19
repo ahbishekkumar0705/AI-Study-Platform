@@ -12,6 +12,9 @@ const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString()
 export const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
   try {
+    if (!email || !email.endsWith('@university.edu')) {
+      return res.status(400).json({ success: false, message: 'Only university email addresses (@university.edu) are allowed' });
+    }
     const userExists = await User.findOne({ $or: [{ email }, { username }] });
     if (userExists) {
       return res.status(400).json({ success: false, message: 'Username or email already exists' });
